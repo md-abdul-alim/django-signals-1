@@ -3,7 +3,7 @@ from buyers.models import Buyer
 import uuid #code variable e random string generate korbe
 # Create your models here.
 
-class Car(models.Model):
+class Car(models.Model): # Before excuting this model, it call signal pre_save_create_code function
 	name = models.CharField(max_length = 200)
 	price = models.PositiveIntegerField()
 	buyer = models.ForeignKey(Buyer, on_delete= models.CASCADE)
@@ -11,7 +11,9 @@ class Car(models.Model):
 
 	def __str__(self):
 		return f"{self.name}-{self.price}-{self.buyer}"
-	
+
+
+	##this is custom signal
 	# def save(self, *args, **kwargs):
 	# 	if self.code == "":
 	# 		self.code = str(uuid.uuid4()).replace("_", "").upper()[:10]
